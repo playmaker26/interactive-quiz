@@ -1,0 +1,301 @@
+:root {
+  --primary-color: #1b1f3b;
+  --secondary-color: #efbf04;
+  --accent-color: #dc143c;
+  --text-color: #fff;
+  --correct: #00ff00;
+  --wrong: #ff0000;
+  --padding: 8px;
+  --heading-font: "Bebas Neue";
+  --text-font: Montserrat;
+}
+
+* {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.main-header.hidden {
+  display: none;
+}
+
+.splash-screen.hidden {
+  display: none;
+}
+
+#quiz.hidden {
+  display: none;
+}
+
+main #quiz {
+  flex-direction: column;
+  gap: 16px;
+}
+
+main #quiz .timer span {
+  font-size: 1.1875rem;
+  font-family: var(--text-font);
+  color: var(--text-color);
+  font-weight: bold;
+  text-align: center;
+}
+
+main #quiz label {
+  font-size: 1rem;
+  font-family: var(--text-font);
+  color: var(--primary-color);
+  padding: var(--padding);
+  font-weight: bold;
+}
+
+main #quiz .quiz-form .options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+main #quiz .quiz-form .options button {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-align: left;
+  font-family: var(--text-font);
+  color: var(--primary-color);
+  width: 100%;
+  padding: var(--padding);
+  border: 1px solid #0000;
+  background-color: transparent;
+  transition: all ease-in 0.3s;
+}
+
+main #quiz .quiz-form .options button.disabled {
+  color: lightgrey;
+}
+
+main #quiz .quiz-form .options button.correct {
+  border: 1px solid var(--correct);
+  font-weight: bold;
+  color: var(--correct);
+}
+
+main #quiz .quiz-form .options button.wrong {
+  border: 1px solid var(--wrong);
+  font-weight: bold;
+  color: var(--wrong);
+}
+
+main #quiz .quiz-form .btn {
+  display: flex;
+  align-items: center;
+}
+
+main #quiz .quiz-form .btn button {
+  align-self: flex-start;
+  padding: var(--padding);
+  background-color: var(--accent-color);
+  font-size: 1rem;
+  font-family: var(--text-font);
+  font-weight: bold;
+  text-align: center;
+  color: var(--text-color);
+  border: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+  }
+
+  .main-header div,
+  .main-header div a,
+  .main-header div a img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+  }
+
+  main .splash-screen article,
+  main .result-screen .result {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  main .splash-screen article header,
+  main .result-screen .result header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding);
+  }
+
+  main .splash-screen article header h1,
+  main .result-screen .result header h1 {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    font-weight: 800;
+    text-align: center;
+    font-family: var(--heading-font);
+  }
+
+  main .splash-screen article p {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-family: var(--text-font);
+    line-height: 25px;
+    padding: var(--padding);
+    text-align: center;
+  }
+
+  main .splash-screen article a,
+  main .result-screen .result button {
+    text-decoration: none;
+    align-self: flex-start;
+    margin: 0 auto;
+    padding: var(--padding);
+    color: var(--text-color);
+    font-weight: bold;
+    background-color: var(--accent-color);
+    text-align: center;
+    font-family: var(--text-font);
+    border: none;
+    appearance: none;
+    outline: none;
+  }
+
+  main #quiz .quiz-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: var(--text-color);
+  }
+
+  main #quiz .timer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+  }
+
+  .main-header div,
+  .main-header div a,
+  .main-header div a img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+  }
+
+  main .splash-screen article,
+  main .result-screen .result {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    width: 640px;
+  }
+
+  main .splash-screen article header,
+  main .result-screen .result header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding);
+  }
+
+  main .splash-screen article header h1,
+  main .result-screen .result header h1 {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    font-weight: 800;
+    text-align: center;
+    font-family: var(--heading-font);
+  }
+
+  main .splash-screen article p {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-family: var(--text-font);
+    line-height: 25px;
+    padding: var(--padding);
+    text-align: center;
+  }
+
+  main .splash-screen article a,
+  main .result-screen .result button {
+    text-decoration: none;
+    align-self: flex-start;
+    margin: 0 auto;
+    padding: var(--padding);
+    color: var(--text-color);
+    font-weight: bold;
+    background-color: var(--accent-color);
+    text-align: center;
+    font-family: var(--text-font);
+    border: none;
+    appearance: none;
+    outline: none;
+  }
+
+  main #quiz .quiz-form {
+    width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: var(--text-color);
+  }
+
+  main #quiz .timer {
+    width: 640px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  main .splash-screen article,
+  main .result-screen .result {
+    width: 720px;
+  }
+
+  main #quiz .quiz-form {
+    width: 720px;
+  }
+
+  main #quiz .timer {
+    width: 720px;
+  }
+
+  main #quiz .quiz-form .options button:hover {
+    background-color: var(--secondary-color);
+    font-weight: bold;
+  }
+}
