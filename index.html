@@ -6,36 +6,30 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="favicon/favicon.svg" type="image/x-icon" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <script defer src="js/question.js"></script>
     <script defer src="js/script.js"></script>
-    <title>BlockBuster brain</title>
+    <title>Buzzer Beater</title>
   </head>
   <body>
-    <header class="main-header">
-      <div class="logo">
-        <a href="index.html"
-          ><img src="logo/logo.svg" alt="blockbuster brain logo quiz"
-        /></a>
-      </div>
-    </header>
-
     <main>
       <section class="splash-screen">
-        <article>
-          <header>
-            <h1>Blockbuster Brain</h1>
-          </header>
-          <p>Test your movie and TV knowledge – are you a true cinephile?</p>
-          <a class="quiz-btn" href="#quiz">Take the Quiz</a>
-        </article>
+        <img
+          class="splash-screen__logo"
+          src="logo/logo.svg"
+          alt="buzzer beater logo"
+        />
+        <header class="splash-screen__header">
+          <h1 class="splash-screen__quiz-title">Buzzer Beater</h1>
+          <p class="splash-screen__tagline">Can you answer at the buzzer</p>
+          <ul class="splash-screen__list">
+            <li class="splash-screen__list-item">
+              <a href="" class="splash-screen__primary-cta">Start Quiz</a>
+            </li>
+            <li class="splash-screen__list-item">
+              <a href="" class="splash-screen__secondary-cta">Instruction</a>
+            </li>
+          </ul>
+        </header>
       </section>
-      <section id="quiz"></section>
     </main>
   </body>
 </html>
