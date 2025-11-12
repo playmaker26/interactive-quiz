@@ -116,37 +116,48 @@ const questions = [
 ];
 
 function startQuiz() {
-    let splashScreen = document.querySelector('.splash-screen');
-    let quizScreen = document.querySelector('.quiz-screen');
-    let resultScreen = document.querySelector('.result-screen');
-    let quizBtn = document.querySelector('.splash-screen__primary-cta');
+   let splashScreen = document.querySelector('.splash-screen');
+   let quizScreen = document.querySelector('.quiz-screen');
+   let startQuizBtn = document.querySelector('.splash-screen__primary-cta');
 
-    quizBtn.addEventListener('click', (e) => {
+   startQuizBtn.addEventListener('click', (e) => {
+    if(splashScreen && quizScreen) {
         e.preventDefault();
 
-        if(splashScreen) {
-            splashScreen.style.display = 'none';
-             resultScreen.style.display = 'none';
-        quizScreen.style.display = 'flex';
+        splashScreen.classList.add('is-hidden');
+        quizScreen.classList.add('is-hidden');
+
         currentQuestion = 0;
         correctAnswer = 0;
         seconds = 24;
 
+        const currentAnswers = questions[currentQuestion].answers;
+ const possibleAnswers = currentAnswers.map(answer => {
+                return `
+                    <li class="quiz-screen__list-item">
+                        <button class="quiz-screen__possible-answers" data-answer-value="${answer.text}">
+                            "${answer.text}"
+                        </button>
+                    </li>
+                `;
+            }).join('');
+
+
         quizScreen.innerHTML = `
         <form id='questionCard'>
-        <header class="quiz-screen__controls">
-        <span class="quiz-screen__number-question">${currentQuestion + 1}Q</span>
-        <span class="quiz-screen__question-timer">${seconds}</span>
-        </header>
-         <p class="quiz-screen__question">${questions[currentQuestion].question}</p>
-        <ul class="quiz-screen__list">
-        <li class="quiz-screen__list-item"><button class="quiz-screen__possible-answers"></button></li>
-        </ul>
-        <button class="quiz-screen__next-btn">Next Question</button>
-        </form>
+                    <header class="quiz-screen__controls">
+                        <span class="quiz-screen__number-question">${currentQuestion + 1}Q</span>
+                        <span class="quiz-screen__question-timer">${seconds}</span>
+                    </header>
+                    <p class="quiz-screen__question">${questions[currentQuestion].question}</p>
+                    <ul class="quiz-screen__list">
+                        ${possibleAnswers}
+                    </ul>
+                    <button class="quiz-screen__next-btn">Next Question</button>
+                </form>
         `;
-        }
-    });
+    }
+   });
 }
 startQuiz();
 

@@ -57,6 +57,8 @@ section {
   gap: var(--large-spacing);
   background-color: var(--general-color);
   border: none;
+  overflow-y: auto;
+  max-height: 90vh;
 }
 
 .modal-screen .modal-screen__header {
@@ -81,6 +83,8 @@ section {
   gap: var(--medium-spacing);
   list-style: none;
   width: 100%;
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 .modal-screen .modal-screen__list .modal-screen__list-item {
@@ -109,9 +113,20 @@ main .result-screen {
   display: none;
 }
 
+main .splash-screen.is-hidden {
+  display: none;
+}
+
+main .quiz-screen.is-hidden {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--large-spacing);
+}
+
 @media only screen and (max-width: 767px) {
-  .splash-screen,
-  .quiz-screen {
+  .splash-screen {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -192,39 +207,6 @@ main .result-screen {
     .splash-screen__list-item
     .splash-screen__secondary-cta {
     border: 2px solid var(--general-color);
-  }
-
-  .quiz-screen form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    background-color: var(--general-color);
-    gap: var(--medium-spacing);
-  }
-
-  .quiz-screen form .quiz-screen__controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .quiz-screen form .quiz-screen__controls span {
-    padding: var(--small-spacing);
-    text-align: center;
-  }
-
-  .quiz-screen form .quiz-screen__controls .quiz-screen__number-question {
-    font-family: body;
-    font-size: 20px;
-    font-weight: var(--font-weight-medium);
-  }
-
-  .quiz-screen form .quiz-screen__controls .quiz-screen__question-timer {
-    font-family: timer;
-    font-size: 40px;
-    font-weight: var(--font-weight-bold);
-    color: red;
   }
 }
 
