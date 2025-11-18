@@ -12,26 +12,29 @@
   <body>
     <main>
       <section class="splash-screen">
-        <img
-          class="splash-screen__logo"
-          src="logo/logo.svg"
-          alt="buzzer beater logo"
-        />
-        <header class="splash-screen__header">
-          <h1 class="splash-screen__quiz-title">Buzzer Beater</h1>
-          <p class="splash-screen__tagline">Can you answer at the buzzer</p>
-          <ul class="splash-screen__list">
-            <li class="splash-screen__list-item">
-              <a href="#" class="splash-screen__primary-cta">Start Quiz</a>
-            </li>
-            <li class="splash-screen__list-item">
-              <a href="#" class="splash-screen__secondary-cta">Instruction</a>
-            </li>
+        <img src="logo/logo.svg" alt="Buzzer Beater logo" />
+        <header class="hero-section">
+          <h1>Buzzer Beater</h1>
+          <p>Can you answer at the buzzer</p>
+          <ul>
+            <li><button class="primary-cta">Start Quiz</button></li>
+            <li><button class="secondary-cta">Instruction</button></li>
           </ul>
         </header>
       </section>
-
-      <section class="quiz-screen"></section>
+      <section class="quiz-screen">
+        <form class="quiz-card" id="quizCard">
+          <header class="quiz-controls">
+            <span class="question-counter"></span
+            ><span class="question-timer"></span>
+          </header>
+          <h2 class="question"></h2>
+          <ul class="multiple-choice">
+            <li class="multiple-choice-list-item"></li>
+          </ul>
+          <button class="next-btn">Next Question</button>
+        </form>
+      </section>
       <section class="result-screen"></section>
     </main>
   </body>

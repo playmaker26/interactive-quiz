@@ -1,111 +1,62 @@
 @font-face {
-  font-family: header;
-  src: url(../fonts/Demo_Fonts/Fontspring-DEMO-integralcf-heavy.otf);
-}
-
-@font-face {
-  font-family: body;
+  font-family: body-text;
   src: url(../fonts/Futura/Futura-Condensed/Futura\ Condensed.ttf);
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: question-number;
-  src: url(../fonts/Futura/Futura-Medium/Futura\ Medium.otf);
+  font-family: header-text;
+  src: url(../fonts/Demo_Fonts/Fontspring-DEMO-integralcf-heavy.otf);
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: timer;
-  src: url(../fonts/ttf/dseg7-classic-latin-400-normal.ttf);
+  font-family: timer-text;
+  src: url(../fonts/ttf/dseg7-classic-latin-300-normal.ttf);
+  font-weight: normal;
+  font-style: normal;
 }
 
 :root {
   /*Color*/
-  --primary-Color: #0c1445;
+  --primary-color: #0c1445;
   --secondary-color: #000000;
   --accent-color: #f88158;
   --hover-color: #57cff7;
+  --success-color: #4cbb17;
+  --error-color: #ff0033;
+  --white: #ffffff;
+  --timer-color: red;
   --disabled-color: #c6c6c6;
-  --correct-answer: #4cbb17;
-  --wrong-answer: #ff0033;
-  --general-color: #fff;
-  /*Text*/
-  --heading-font-size: 2rem;
-  --body-font-size: 1rem;
+
+  /*Font Size*/
+  --font-size-heading: 2rem;
+  --font-size-body: 1rem;
+  --font-size-question: 1.5rem;
+  --font-size-question-number: 1.25rem;
+  --font-size-timer: 2.5rem;
+  --font-size-multiple-choice: 1.5rem;
+
   /*Font Weight*/
-  --font-weight-bold: bold;
+  --font-weight-regular: 400;
   --font-weight-medium: 500;
-  /*spacing*/
-  --small-spacing: 0.5rem;
-  --medium-spacing: 1rem;
-  --large-spacing: 1.5rem;
-  --extra-large-spacing: 2.625rem;
+  --font-weight-bold: 700;
+
+  /*Spacing*/
+  --spacing-small: 0.5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 1.5rem;
+  --spacing-extra-large: 2.625rem;
 }
 
 body {
-  background-color: var(--primary-Color);
+  background-color: var(--primary-color);
 }
 
 section {
   min-height: 100vh;
-}
-
-.modal-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--large-spacing);
-  background-color: var(--general-color);
-  border: none;
-  overflow-y: auto;
-  max-height: 90vh;
-}
-
-.modal-screen .modal-screen__header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--small-spacing);
-}
-
-.modal-screen .modal-screen__header .modal-screen__title {
-  font-size: var(--body-font-size);
-  font-family: header;
-  font-weight: var(--font-weight-bold);
-  color: var(--secondary-color);
-  text-align: center;
-}
-
-.modal-screen .modal-screen__list {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  gap: var(--medium-spacing);
-  list-style: none;
-  width: 100%;
-  max-height: 70vh;
-  overflow-y: auto;
-}
-
-.modal-screen .modal-screen__list .modal-screen__list-item {
-  padding: var(--small-spacing);
-  font-size: var(--body-font-size);
-  font-family: body;
-  font-weight: normal;
-  color: var(--secondary-color);
-}
-
-.modal-screen .modal-screen__close-btn {
-  width: 100%;
-  text-align: center;
-  background-color: var(--accent-color);
-  padding: var(--small-spacing);
-  font-size: 24px;
-  font-family: body;
-  font-weight: var(--font-weight-bold);
-  color: var(--general-color);
-  border: none;
-  transition: all ease-in 0.3s;
 }
 
 main .quiz-screen,
@@ -117,221 +68,304 @@ main .splash-screen.is-hidden {
   display: none;
 }
 
-main .quiz-screen.is-hidden {
+main .quiz-screen.is-shown {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: var(--large-spacing);
+}
+
+main .quiz-screen.is-shown .quiz-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--spacing-medium);
+  background-color: var(--white);
+}
+
+main .quiz-screen.is-shown .quiz-card .quiz-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main .quiz-screen.is-shown .quiz-card .quiz-controls span {
+  text-align: center;
+  padding: var(--spacing-small);
+}
+
+main .quiz-screen.is-shown .quiz-card .quiz-controls .question-counter {
+  font-family: body-text;
+  font-size: var(--font-size-question-number);
+  font-weight: var(--font-weight-medium);
+  color: var(--secondary-color);
+}
+
+main .quiz-screen.is-shown .quiz-card .quiz-controls .question-timer {
+  font-family: timer-text;
+  font-size: var(--font-size-timer);
+  color: var(--timer-color);
+  font-weight: var(--font-weight-bold);
+}
+
+main .quiz-screen.is-shown .question {
+  padding: var(--spacing-small);
+  color: var(--secondary-color);
+  font-family: body-text;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-question);
+}
+
+main .quiz-screen.is-shown .multiple-choice {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--spacing-medium);
+  list-style: none;
+}
+
+main .quiz-screen.is-shown .multiple-choice .multiple-choice-list-item {
+  padding: var(--spacing-small);
+}
+
+main
+  .quiz-screen.is-shown
+  .multiple-choice
+  .multiple-choice-list-item
+  .option-btn {
+  padding: var(--spacing-small);
+  background-color: var(--white);
+  text-align: left;
+  font-family: body-text;
+  font-weight: var(--font-weight-medium);
+  border: 1px solid var(--secondary-color);
+  width: 100%;
+  font-size: var(--font-size-multiple-choice);
+  transition: all ease-in 0.3s;
+}
+
+main .quiz-screen.is-shown .next-btn {
+  padding: var(--spacing-small);
+  align-self: flex-start;
+  background-color: var(--accent-color);
+  color: var(--white);
+  text-align: center;
+  font-family: body-text;
+  font-weight: var(--font-weight-bold);
+  border: none;
+  transition: all ease-in 0.3s;
+}
+
+main .quiz-screen.is-shown .next-btn.is-disabled {
+  background-color: var(--disabled-color);
+  opacity: 0.7;
+}
+
+main
+  .quiz-screen.is-shown
+  .multiple-choice
+  .multiple-choice-list-item
+  .option-btn.is-correct {
+  background-color: var(--success-color);
+  color: var(--white);
+  font-weight: var(--font-weight-bold);
+  border: none;
+}
+
+main
+  .quiz-screen.is-shown
+  .multiple-choice
+  .multiple-choice-list-item
+  .option-btn.is-wrong {
+  background-color: var(--error-color);
+  color: var(--white);
+  font-weight: var(--font-weight-bold);
+  border: none;
+}
+
+main
+  .quiz-screen.is-shown
+  .multiple-choice
+  .multiple-choice-list-item
+  .option-btn.is-correct-fallback {
+  background-color: var(--success-color);
+  color: var(--white);
+  font-weight: var(--font-weight-bold);
+  border: none;
 }
 
 @media only screen and (max-width: 767px) {
-  .splash-screen {
+  main .splash-screen {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: var(--large-spacing);
+    gap: var(--spacing-large);
   }
 
-  .splash-screen .splash-screen__logo {
+  main .splash-screen img {
     width: 200px;
   }
 
-  .splash-screen .splash-screen__header {
+  main .splash-screen .hero-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: var(--medium-spacing);
-    width: 320px;
+    gap: var(--spacing-medium);
   }
 
-  .splash-screen .splash-screen__header .splash-screen__quiz-title {
-    font-family: header;
-    color: var(--general-color);
+  main .splash-screen .hero-section h1 {
+    font-family: header-text;
+    padding: var(--spacing-small);
     text-align: center;
-    font-size: var(--heading-font-size);
+    color: var(--white);
+    font-size: var(--font-size-heading);
   }
 
-  .splash-screen .splash-screen__header .splash-screen__tagline {
-    font-family: body;
-    color: var(--general-color);
-    font-size: var(--body-font-size);
-    font-weight: 400;
+  main .splash-screen .hero-section p {
+    font-family: body-text;
+    font-size: var(--font-size-body);
+    padding: var(--spacing-small);
+    text-align: center;
+    color: var(--white);
   }
 
-  .splash-screen .splash-screen__header .splash-screen__list {
+  main .splash-screen .hero-section ul {
+    width: 100%;
+    list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--extra-large-spacing);
-    list-style: none;
-    width: 100%;
   }
 
-  .splash-screen
-    .splash-screen__header
-    .splash-screen__list
-    .splash-screen__list-item {
-    padding: var(--small-spacing);
+  main .splash-screen .hero-section ul li {
+    padding: var(--spacing-small);
   }
 
-  .splash-screen
-    .splash-screen__header
-    .splash-screen__list
-    .splash-screen__list-item
-    a {
-    display: inline-block;
-    padding: var(--small-spacing);
+  main .splash-screen .hero-section ul li button {
+    padding: var(--spacing-small);
+  }
+
+  main .splash-screen .hero-section ul li .primary-cta {
+    padding: var(--spacing-small);
+    border: none;
     text-align: center;
-    color: var(--general-color);
-    font-family: body;
-    font-size: var(--body-font-size);
-    text-decoration: none;
-    width: 109px;
+    color: var(--white);
+    font-size: var(--font-size-body);
+    font-family: body-text;
     font-weight: var(--font-weight-bold);
-  }
-
-  .splash-screen
-    .splash-screen__header
-    .splash-screen__list
-    .splash-screen__list-item
-    .splash-screen__primary-cta {
     background-color: var(--accent-color);
+    width: 123px;
   }
 
-  .splash-screen
-    .splash-screen__header
-    .splash-screen__list
-    .splash-screen__list-item
-    .splash-screen__secondary-cta {
-    border: 2px solid var(--general-color);
+  main .splash-screen .hero-section ul li .secondary-cta {
+    padding: var(--spacing-small);
+    border: 2px solid var(--white);
+    text-align: center;
+    color: var(--white);
+    font-size: var(--font-size-body);
+    font-family: body-text;
+    font-weight: var(--font-weight-bold);
+    background-color: inherit;
+    width: 123px;
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .splash-screen {
+@media only screen and (min-width: 767px) {
+  main .splash-screen {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: var(--large-spacing);
+    gap: var(--spacing-large);
   }
 
-  .splash-screen .splash-screen__logo {
-    width: 250px;
+  main .splash-screen img {
+    width: 248px;
   }
 
-  .splash-screen .splash-screen__header {
+  main .splash-screen .hero-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: var(--medium-spacing);
-    width: 400px;
+    gap: var(--spacing-medium);
   }
 
-  .splash-screen .splash-screen__header .splash-screen__quiz-title {
-    font-family: header;
-    color: var(--general-color);
+  main .splash-screen .hero-section h1 {
+    font-family: header-text;
+    padding: var(--spacing-small);
     text-align: center;
-    font-size: var(--heading-font-size);
+    color: var(--white);
+    font-size: var(--font-size-heading);
   }
 
-  .splash-screen .splash-screen__header .splash-screen__tagline {
-    font-family: body;
-    color: var(--general-color);
-    font-size: var(--body-font-size);
-    font-weight: 400;
+  main .splash-screen .hero-section p {
+    font-family: body-text;
+    font-size: var(--font-size-body);
+    padding: var(--spacing-small);
+    text-align: center;
+    color: var(--white);
   }
 
-  .splash-screen .splash-screen__header .splash-screen__list {
+  main .splash-screen .hero-section ul {
+    width: 100%;
+    list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--extra-large-spacing);
-    list-style: none;
-    width: 100%;
   }
 
-  .splash-screen
-    .splash-screen__header
-    .splash-screen__list
-    .splash-screen__list-item {
-    padding: var(--small-spacing);
+  main .splash-screen .hero-section ul li {
+    padding: var(--spacing-small);
   }
 
-  .splash-screen
-    .splash-screen__header
-    .splash-screen__list
-    .splash-screen__list-item
-    a {
-    display: inline-block;
-    padding: var(--small-spacing);
-    text-align: center;
-    color: var(--general-color);
-    font-family: body;
-    font-size: var(--body-font-size);
-    text-decoration: none;
-    width: 109px;
+  main .splash-screen .hero-section ul li button {
+    padding: var(--spacing-small);
     transition: all ease-in 0.3s;
+  }
+
+  main .splash-screen .hero-section ul li .primary-cta {
+    padding: var(--spacing-small);
+    border: none;
+    text-align: center;
+    color: var(--white);
+    font-size: var(--font-size-body);
+    font-family: body-text;
     font-weight: var(--font-weight-bold);
-  }
-
-  .splash-screen
-    .splash-screen__header
-    .splash-screen__list
-    .splash-screen__list-item
-    .splash-screen__primary-cta {
     background-color: var(--accent-color);
+    width: 123px;
   }
 
-  .splash-screen
-    .splash-screen__header
-    .splash-screen__list
-    .splash-screen__list-item
-    .splash-screen__secondary-cta {
-    border: 2px solid var(--general-color);
+  main .splash-screen .hero-section ul li .secondary-cta {
+    padding: var(--spacing-small);
+    border: 2px solid var(--white);
+    text-align: center;
+    color: var(--white);
+    font-size: var(--font-size-body);
+    font-family: body-text;
+    font-weight: var(--font-weight-bold);
+    background-color: inherit;
+    width: 123px;
   }
 }
 
 @media only screen and (min-width: 1000px) {
-  .splash-screen .splash-screen__logo {
-    width: 310px;
-  }
-
-  .splash-screen .splash-screen__header {
-    width: 500px;
-  }
-
-  .splash-screen
-    .splash-screen__header
-    .splash-screen__list
-    .splash-screen__list-item
-    a {
-    width: 231px;
-  }
-
-  .splash-screen
-    .splash-screen__header
-    .splash-screen__list
-    .splash-screen__list-item
-    .splash-screen__primary-cta:hover {
+  main .splash-screen .hero-section ul li .primary-cta:hover {
     background-color: var(--hover-color);
-    color: var(--secondary-Color);
+    color: var(--secondary-color);
   }
 
-  .splash-screen
-    .splash-screen__header
-    .splash-screen__list
-    .splash-screen__list-item
-    .splash-screen__secondary-cta:hover {
+  main .splash-screen .hero-section ul li .secondary-cta:hover {
     border: 2px solid var(--hover-color);
   }
 
-  .modal-screen .modal-screen__close-btn:hover {
+  main
+    .quiz-screen.is-shown
+    .multiple-choice
+    .multiple-choice-list-item
+    .option-btn:hover {
     background-color: var(--hover-color);
-    color: var(--secondary-color);
+    font-weight: var(--font-weight-bold);
   }
 }
