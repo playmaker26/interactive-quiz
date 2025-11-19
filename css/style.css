@@ -75,6 +75,13 @@ main .quiz-screen.is-shown {
   align-items: center;
 }
 
+main .result-screen.is-shown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 main .quiz-screen.is-shown .quiz-card {
   display: flex;
   flex-direction: column;
@@ -193,6 +200,51 @@ main
   color: var(--white);
   font-weight: var(--font-weight-bold);
   border: none;
+}
+
+main .result-screen .results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-medium);
+}
+
+main .result-screen .results .final-results {
+  font-family: header-text;
+  padding: var(--spacing-small);
+  text-align: center;
+  color: var(--white);
+  font-size: 20px;
+}
+
+main .result-screen .results .final-results .percent {
+  font-family: body-text;
+  font-size: var(--font-size-heading);
+  text-align: center;
+  color: var(--hover-color);
+}
+
+main .result-screen .results .result-message {
+  font-family: body-text;
+  font-size: var(--font-size-body);
+  padding: var(--spacing-small);
+  text-align: center;
+  color: var(--white);
+}
+
+main .result-screen .results .restart-quiz {
+  padding: var(--spacing-small);
+  background-color: var(--accent-color);
+  color: var(--white);
+  text-align: center;
+  font-family: body-text;
+  font-weight: var(--font-weight-bold);
+  border: none;
+  text-decoration: none;
+  transition: all ease-in 0.3s;
+  width: 123px;
+  display: inline-block;
 }
 
 @media only screen and (max-width: 767px) {
@@ -364,7 +416,7 @@ main
     .quiz-screen.is-shown
     .multiple-choice
     .multiple-choice-list-item
-    .option-btn:hover {
+    .option-btn:hover:not([disabled]) {
     background-color: var(--hover-color);
     font-weight: var(--font-weight-bold);
   }

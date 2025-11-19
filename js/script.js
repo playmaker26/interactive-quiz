@@ -2,6 +2,7 @@ let score = 0;
 let questionTimer = 24;
 let nextQuestionTimer = 5;
 let currentQuestion = 0;
+let totalQuestions = 10;
 
 
 const questions = [
@@ -154,6 +155,7 @@ quizCard.innerHTML = `
     answerOptions.forEach(option => {
         option.addEventListener('click', handleClickedChoice);
     });
+    nextQuestionButton();
 }
 
 function handleClickedChoice(e) {
@@ -163,7 +165,7 @@ const isCorrect = clickedAnswer.dataset.correct === "true";
 let timerQuiz = document.querySelector('.question-timer');
 if(isCorrect) {
     clickedAnswer.classList.add('is-correct');
-    
+    score++;
 
 }else {
     clickedAnswer.classList.add('is-wrong');
@@ -183,8 +185,47 @@ nextBtn.disabled = false;
 nextBtn.classList.remove('is-disabled');
 }
 
+function displayNextQuestion(){
+    currentQuestion++;
 
-function disableButtons(e) {
+    if(currentQuestion < questions.length) {
+        displayQuestion();
+    }else {
+        showResults();
+    }
+}
 
+function nextQuestionButton() {
+    let nextBtn = document.querySelector('.next-btn');
+
+nextBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    displayNextQuestion();
+})
+}
+
+
+function showResults() {
+    let quizScreen = document.querySelector('.quiz-screen');
+    let resultScreen = document.querySelector('.result-screen');
+    let percentageScore = (score / totalQuestions) * 100;
+let percentage = document.querySelector('.percent');
+let resultMessage = document.querySelector('.result-message');
+let passingScore = 'You\'re an All-Star!'
+let mediumScore = 'You made the starting lineup.'
+let failedScore = ' You\'re a bench warmer.'
+    quizScreen.classList.remove('is-shown');
+    resultScreen.classList.add('is-shown');
+
+    if(percentageScore >= 80) {
+        percentage.textContent = percentageScore + '%';
+        resultMessage.textContent = passingScore;
+    }else if(percentageScore <= 30) {
+        percentage.textContent = percentageScore + '%';
+        resultMessage.textContent = failedScore;
+    }else if(percentageScore <= 50) {
+        percentage.textContent = percentageScore + '%';
+        resultMessage.textContent = mediumScore;
+    }
 }
 
