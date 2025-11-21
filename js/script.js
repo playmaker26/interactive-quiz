@@ -116,6 +116,8 @@ if(splashScreen && quizScreen) {
     nextQuestionTimer = 5;
     currentQuestion = 0;
     displayQuestion();
+    
+  shuffledQuestions = shuffleQuestions(questions);
 }
 });
 }
@@ -218,7 +220,7 @@ let failedScore = ' You\'re a bench warmer.'
     resultScreen.classList.add('is-shown');
 
     if(percentageScore >= 80) {
-        percentage.textContent = percentageScore + '%';
+        percentage.textContent = percentageScore  + '%';
         resultMessage.textContent = passingScore;
     }else if(percentageScore <= 30) {
         percentage.textContent = percentageScore + '%';
@@ -228,4 +230,19 @@ let failedScore = ' You\'re a bench warmer.'
         resultMessage.textContent = mediumScore;
     }
 }
+
+function shuffleQuestions(array) {
+let currentIndex = array.length;
+let randomIndex;
+
+while(currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+}
+
+return array;
+}
+let shuffledQuestions = shuffleQuestions(questions);
 

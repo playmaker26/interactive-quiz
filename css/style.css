@@ -208,29 +208,31 @@ main .result-screen .results {
   justify-content: center;
   align-items: center;
   gap: var(--spacing-medium);
+  background-color: var(--white);
 }
 
 main .result-screen .results .final-results {
   font-family: header-text;
   padding: var(--spacing-small);
   text-align: center;
-  color: var(--white);
+  color: var(--secondary-color);
   font-size: 20px;
 }
 
 main .result-screen .results .final-results .percent {
-  font-family: body-text;
+  font-family: body-header;
   font-size: var(--font-size-heading);
   text-align: center;
-  color: var(--hover-color);
+  color: var(--accent-color);
+  font-weight: var(--font-weight-bold);
 }
 
 main .result-screen .results .result-message {
   font-family: body-text;
-  font-size: var(--font-size-body);
+  font-size: 20px;
   padding: var(--spacing-small);
   text-align: center;
-  color: var(--white);
+  color: var(--secondary-color);
 }
 
 main .result-screen .results .restart-quiz {
