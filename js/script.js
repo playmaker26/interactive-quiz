@@ -3,7 +3,7 @@ let questionTimer = 24;
 let nextQuestionTimer = 5;
 let currentQuestion = 0;
 let totalQuestions = 10;
-
+let countDownInterval;
 
 const questions = [
     {
@@ -116,8 +116,8 @@ if(splashScreen && quizScreen) {
     nextQuestionTimer = 5;
     currentQuestion = 0;
     displayQuestion();
-    
   shuffledQuestions = shuffleQuestions(questions);
+  quizTimer();
 }
 });
 }
@@ -143,9 +143,9 @@ quizCard.innerHTML = `
           </header>
           <h2 class="question">${questions[currentQuestion].question}</h2>
           <ul class="multiple-choice">
-            <li class="multiple-choice-list-item">
+            
             ${answerChoices}
-            </li>
+            
           </ul>
           <button class="next-btn">Next Question</button>
 `;
@@ -245,4 +245,25 @@ while(currentIndex !== 0) {
 return array;
 }
 let shuffledQuestions = shuffleQuestions(questions);
+
+
+function quizTimer() {
+const timerDisplay = document.querySelector('.question-timer');
+
+countDownInterval = setInterval(() => {
+    questionTimer--;
+    timerDisplay.textContent = questionTimer;
+
+    if(questionTimer <= 0) {
+        clearInterval(countDownInterval);
+        timerDisplay.textContent = '00';
+        timerSound();
+    }
+}, 1000)
+}
+
+function timerSound() {
+    let buzzerSound = new Audio('./sound/buzzer.mp3');
+    buzzerSound.play();
+}
 

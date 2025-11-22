@@ -88,6 +88,7 @@ main .quiz-screen.is-shown .quiz-card {
   justify-content: center;
   gap: var(--spacing-medium);
   background-color: var(--white);
+  width: 360px;
 }
 
 main .quiz-screen.is-shown .quiz-card .quiz-controls {
@@ -402,6 +403,23 @@ main .result-screen .results .restart-quiz {
     background-color: inherit;
     width: 123px;
   }
+
+  main .quiz-screen.is-shown .quiz-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-medium);
+    background-color: var(--white);
+    width: 500px;
+  }
+
+  main .quiz-screen.is-shown .multiple-choice {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-medium);
+    justify-content: center;
+    list-style: none;
+  }
 }
 
 @media only screen and (min-width: 1000px) {
@@ -421,5 +439,22 @@ main .result-screen .results .restart-quiz {
     .option-btn:hover:not([disabled]) {
     background-color: var(--hover-color);
     font-weight: var(--font-weight-bold);
+  }
+
+  main .quiz-screen.is-shown .quiz-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-medium);
+    background-color: var(--white);
+    width: 500px;
+  }
+
+  main .quiz-screen.is-shown .multiple-choice {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-medium);
+    justify-content: center;
+    list-style: none;
   }
 }
