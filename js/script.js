@@ -263,7 +263,7 @@ countDownInterval = setInterval(() => {
 }
 
 function timerSound() {
-    let buzzerSound = new Audio('./sound/buzzer.mp3');
+    let buzzerSound = new Audio('./Sound/buzzer.mp3');
     buzzerSound.play();
 }
 
