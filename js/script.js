@@ -114,11 +114,13 @@ if(splashScreen && quizScreen) {
     score = 0;
     questionTimer = 24;
     nextQuestionTimer = 5;
-    currentQuestion = 0;
-    displayQuestion();
+    currentQuestion = 0;  
   shuffledQuestions = shuffleQuestions(questions);
+  shuffledQuestions.forEach(question => {
+    shuffleQuestionAnswers(question.answers);
+  });
+  displayQuestion();
   quizTimer();
-  setUpNextButtonState(true);
 }
 });
 }
@@ -139,7 +141,7 @@ return `
 
 quizCard.innerHTML = `
 <header class="quiz-controls">
-            <span class="question-counter">${currentQuestion + 1} Q</span
+            <span class="question-counter">${currentQuestion + 1}Q</span
             ><span class="question-timer">${questionTimer}</span>
           </header>
           <h2 class="question">${questions[currentQuestion].question}</h2>
@@ -162,7 +164,9 @@ quizCard.innerHTML = `
 }
 
 function handleClickedChoice(e) {
-
+if(!e) {
+return;
+}
 const clickedAnswer = e.target;
 const isCorrect = clickedAnswer.dataset.correct === "true";
 let timerQuiz = document.querySelector('.question-timer');
@@ -187,17 +191,15 @@ document.querySelectorAll('.option-btn').forEach(answerChoice => {
 let nextBtn = document.querySelector('.next-btn');
 nextBtn.disabled = false;
 nextBtn.classList.remove('is-disabled');
-setUpNextButtonState(false);
 }
 
 function displayNextQuestion(){
     currentQuestion++;
-    clearInterval(countDownInterval);
     
     if(currentQuestion < questions.length) {
         displayQuestion();
         quizTimer();
-        setUpNextButtonState(true);
+         questionTimer = 24;
     }else {
         showResults();
     }
@@ -252,14 +254,23 @@ return array;
 }
 let shuffledQuestions = shuffleQuestions(questions);
 
+function shuffleQuestionAnswers(array) {
+    let currentIndex = array.length;
+    let randomIndex;
+
+    while(currentIndex !==0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+    return array;
+}
+
+
 
 function quizTimer() {
 const timerDisplay = document.querySelector('.question-timer');
-questionTimer = 24;
-
-if(countDownInterval) {
-    clearInterval(countDownInterval);
-}
 
 countDownInterval = setInterval(() => {
     questionTimer--;
@@ -270,8 +281,14 @@ countDownInterval = setInterval(() => {
         timerDisplay.textContent = '00';
         timerSound();
         questionTimerExpires();
+        handleClickedChoice();
+
+        setTimeout(() => {
+            displayNextQuestion();
+
+        }, 5000);
     }
-}, 1000)
+}, 1000);
 }
 
 function timerSound() {
@@ -281,80 +298,61 @@ function timerSound() {
 
 
 function questionTimerExpires() {
-timerSound();
-
+let nextBtn = document.querySelector('.next-btn');
 let correctAnswer = document.querySelector('.option-btn[data-correct="true"]');
-
-if(correctAnswer) {
-    correctAnswer.classList.add('is-correct-fallback');
-}
-
+nextBtn.disabled = true;
+nextBtn.classList.add('is-disabled');
+correctAnswer.classList.add('is-correct-fallback');
 document.querySelectorAll('.option-btn').forEach(answerChoice => {
     answerChoice.disabled = true;
     answerChoice.classList.add('un-selected-choices-is-disabled');
 });
-
-/*let nextBtn = document.querySelector('.next-btn');
-nextBtn.disabled = false;
-nextBtn.classList.remove('is-disabled');*/
-setUpNextButtonState(false)
-setTimeout(() => {
-   displayNextQuestion(); 
-}, 5000);
-}
-
-function setUpNextButtonState(isDisabled) {
-let nextBtn = document.querySelector('.next-btn');
-
-if(isDisabled) {
-    nextBtn.disabled = true;
-    nextBtn.classList.add('is-disabled');
-}else{
-     nextBtn.disabled = false;
-     nextBtn.classList.remove('is-disabled');
-}
 }
 
 function instructionModal() {
-    let instructionBtn = document.querySelector('.secondary-cta');
-    let modal = document.createElement('dialog');
-    let header = document.createElement('header');
-    let headerTwo = document.createElement('h2');
-    let ul = document.createElement('ul');
-    
-    let button = document.createElement('button');
-    
-    instructionBtn.addEventListener('click', () => {
-        if(modal) {
-            document.body.appendChild(modal);
-            modal.appendChild(header);
-            header.appendChild(headerTwo);
-            modal.appendChild(ul);
-           
+let instructionBtn = document.querySelector('.secondary-cta');
+let modal = document.createElement('dialog');
+let header = document.createElement('header');
+let headerTwo = document.createElement('h2');
+let ul = document.createElement('ul');
+let button = document.createElement('button');
 
-            let instructionTitle = 'instruction';
-            headerTwo.textContent = instructionTitle;
-           
+const instructions = [
+'You have exactly 24 seconds to answer each question from the moment it is presented/read.',
+        'If the 24 seconds are up, that question will be marked wrong.',
+        'You must answer the question before moving to the next one (no skipping).',
+        'All questions are multiple-choice, with one correct answer.',
+        'Each correct answer earns 1 point; there is no penalty for an incorrect guess.',
+        'At the end of the quiz your score will be given'
+];
 
-            for (let i = 0; i < 6; i++) {
-                let li = document.createElement('li');
-                ul.appendChild(li);
-                li.textContent = `You have exactly 24 seconds to answer each question from the moment it is presented/read.`
-                li.textContent = `If the 24 seconds are up, that question will be marked wrong.`
-                li.textContent = `You must answer the question before moving to the next one (no skipping).`
-                li.textContent = `All questions are multiple-choice, with one correct answer.`
-                li.textContent = 'Each correct answer earns 1 point; there is no penalty for an incorrect guess.'
-                li.textContent = 'At the end of the quiz your score will be given '
-            }
- modal.appendChild(button);
-  let closeModal = 'Got it';
-            button.textContent = closeModal;
-            modal.showModal();
-        }
-    });
+instructionBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+if(modal) {
+    document.body.appendChild(modal);
+    modal.appendChild(header);
+    header.appendChild(headerTwo);
+    modal.appendChild(ul);
+    modal.appendChild(button);
 
-    button.addEventListener('click', () => {
-        modal.close();
-    });
+    let instructionTitle = 'Instruction';
+    headerTwo.textContent = instructionTitle;
+
+    for(let i = 0; i < instructions.length; i++) {
+        let li = document.createElement('li');
+        li.textContent = instructions[i];
+        ul.appendChild(li);
+    }
+
+    let closeModal = 'Got it';
+    button.textContent = closeModal;
+    modal.showModal();
+}
+});
+
+button.addEventListener('click', () => {
+    modal.close();
+    modal.remove();
+});
 }
 instructionModal();

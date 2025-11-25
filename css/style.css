@@ -250,6 +250,58 @@ main .result-screen .results .restart-quiz {
   display: inline-block;
 }
 
+dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large);
+  background-color: var(--white);
+  border: none;
+  max-height: 80vh;
+  max-width: 80vh;
+}
+
+dialog header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-small);
+}
+
+dialog header h2 {
+  text-align: center;
+  color: var(--secondary-color);
+  font-size: 24px;
+  font-family: header-text;
+}
+
+dialog ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+  list-style-type: none;
+  overflow-y: auto;
+}
+
+dialog ul li {
+  padding: var(--spacing-small);
+  color: var(--secondary-color);
+  font-size: var(--font-size-body);
+  font-family: body-text;
+}
+
+dialog button {
+  padding: var(--spacing-small);
+  border: none;
+  background-color: var(--accent-color);
+  text-align: center;
+  font-size: 24px;
+  font-weight: var(--font-weight-bold);
+  font-family: body-text;
+  color: var(--white);
+  transition: all ease-in 0.3s;
+}
+
 @media only screen and (max-width: 767px) {
   main .splash-screen {
     display: flex;
@@ -456,5 +508,15 @@ main .result-screen .results .restart-quiz {
     gap: var(--spacing-medium);
     justify-content: center;
     list-style: none;
+  }
+
+  dialog button:hover {
+    background-color: var(--hover-color);
+    color: var(--secondary-color);
+  }
+
+  main .quiz-screen.is-shown .next-btn:hover {
+    background-color: var(--hover-color);
+    color: var(--secondary-color);
   }
 }
